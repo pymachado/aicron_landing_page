@@ -87,7 +87,7 @@ export function ContactForm() {
                     <FormItem>
                       <FormLabel>Nombre completo</FormLabel>
                       <FormControl>
-                        <Input placeholder="Juan Pérez" className="h-12 bg-gray-50 border-gray-200 focus:bg-white transition-colors" {...field} />
+                        <Input placeholder="Juan Pérez" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -101,7 +101,7 @@ export function ContactForm() {
                     <FormItem>
                       <FormLabel>Correo electrónico</FormLabel>
                       <FormControl>
-                        <Input placeholder="juan@empresa.com" type="email" className="h-12 bg-gray-50 border-gray-200 focus:bg-white transition-colors" {...field} />
+                        <Input placeholder="juan@empresa.com" type="email" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -115,7 +115,7 @@ export function ContactForm() {
                     <FormItem>
                       <FormLabel>Teléfono / WhatsApp</FormLabel>
                       <FormControl>
-                        <Input placeholder="+34 600 000 000" className="h-12 bg-gray-50 border-gray-200 focus:bg-white transition-colors" {...field} />
+                        <Input placeholder="+34 600 000 000" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -129,7 +129,7 @@ export function ContactForm() {
                     <FormItem>
                       <FormLabel>Nombre de la Empresa</FormLabel>
                       <FormControl>
-                        <Input placeholder="Mi Empresa S.L." className="h-12 bg-gray-50 border-gray-200 focus:bg-white transition-colors" {...field} />
+                        <Input placeholder="Mi Empresa S.L." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -143,7 +143,7 @@ export function ContactForm() {
                     <FormItem>
                       <FormLabel>Cargo</FormLabel>
                       <FormControl>
-                        <Input placeholder="CEO, Director de Operaciones..." className="h-12 bg-gray-50 border-gray-200 focus:bg-white transition-colors" {...field} />
+                        <Input placeholder="CEO, Director de Operaciones..." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -155,19 +155,17 @@ export function ContactForm() {
                   name="revenue"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Facturación Anual Aproximada</FormLabel>
+                      <FormLabel>Facturación Anual Aproximada (USD)</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="h-12 bg-gray-50 border-gray-200 focus:bg-white transition-colors">
+                          <SelectTrigger className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all">
                             <SelectValue placeholder="Selecciona un rango" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="<100k">Menos de 100k€</SelectItem>
-                          <SelectItem value="100k-500k">100k€ - 500k€</SelectItem>
-                          <SelectItem value="500k-1M">500k€ - 1M€</SelectItem>
-                          <SelectItem value="1M-5M">1M€ - 5M€</SelectItem>
-                          <SelectItem value=">5M">Más de 5M€</SelectItem>
+                          <SelectItem value="<=150k">≤ 150K USD</SelectItem>
+                          <SelectItem value="500k">500K USD</SelectItem>
+                          <SelectItem value="10M">10M USD</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -181,21 +179,9 @@ export function ContactForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Tipo de Negocio</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="h-12 bg-gray-50 border-gray-200 focus:bg-white transition-colors">
-                            <SelectValue placeholder="Selecciona el tipo" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="B2B">B2B (Servicios a empresas)</SelectItem>
-                          <SelectItem value="B2C">B2C (Venta a consumidor final)</SelectItem>
-                          <SelectItem value="Ecommerce">Ecommerce</SelectItem>
-                          <SelectItem value="SaaS">SaaS / Software</SelectItem>
-                          <SelectItem value="Agency">Agencia / Consultoría</SelectItem>
-                          <SelectItem value="Other">Otro</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <FormControl>
+                        <Input placeholder="Ej. Agencia de marketing, Ecommerce de moda..." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -208,7 +194,7 @@ export function ContactForm() {
                     <FormItem>
                       <FormLabel>Web o LinkedIn (Opcional)</FormLabel>
                       <FormControl>
-                        <Input placeholder="www.miempresa.com" className="h-12 bg-gray-50 border-gray-200 focus:bg-white transition-colors" {...field} />
+                        <Input placeholder="www.miempresa.com" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -225,7 +211,7 @@ export function ContactForm() {
                     <FormControl>
                       <Textarea 
                         placeholder="Describe brevemente los procesos manuales que más tiempo consumen en tu equipo..." 
-                        className="min-h-[120px] bg-gray-50 border-gray-200 focus:bg-white transition-colors resize-none"
+                        className="min-h-[120px] bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all resize-none"
                         {...field} 
                       />
                     </FormControl>
