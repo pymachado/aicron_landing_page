@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import logoImg from "@assets/logo_280_9x95_1_1766715570899.png";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,12 +36,7 @@ export function Navigation() {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <Link href="/">
           <div className="flex items-center gap-2 cursor-pointer">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/20">
-              A
-            </div>
-            <span className={`text-2xl font-bold tracking-tight ${isScrolled ? "text-foreground" : "text-foreground"}`}>
-              AICRON
-            </span>
+            <img src={logoImg} alt="AICRON Logo" className="h-10 w-auto" />
           </div>
         </Link>
 

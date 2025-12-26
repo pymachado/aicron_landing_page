@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { ContactForm } from "@/components/ContactForm";
 import { Button } from "@/components/ui/button";
+import logoImg from "@assets/logo_280_9x95_1_1766715570899.png";
 import { 
   CheckCircle2, 
   XCircle, 
@@ -307,10 +308,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="text-center md:text-left">
               <div className="flex items-center gap-2 justify-center md:justify-start mb-4">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                  A
-                </div>
-                <span className="text-xl font-bold">AICRON</span>
+                <img src={logoImg} alt="AICRON Logo" className="h-8 w-auto" />
               </div>
               <p className="text-muted-foreground text-sm max-w-md">
                 "La IA no es el futuro, es el presente. Las empresas que la adopten hoy liderarán sus mercados mañana."
