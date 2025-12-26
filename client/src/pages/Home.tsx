@@ -215,24 +215,24 @@ export default function Home() {
       </section>
 
       {/* DIFFERENTIATOR */}
-      <section id="values" className="py-24 bg-foreground text-white relative overflow-hidden">
-        {/* Abstract shapes */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[80px] pointer-events-none" />
+      <section id="values" className="py-24 bg-white border-y border-gray-100 relative overflow-hidden">
+        {/* Abstract shapes with brand colors */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div {...fadeInUp}>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight text-gray-900">
                 Más partner que proveedor
               </h2>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                 No somos una agencia que desaparece tras la entrega. Nos integramos como tu departamento de innovación externa.
               </p>
               <div className="flex gap-4">
                 <Button 
                   onClick={scrollToForm}
-                  className="bg-white text-foreground hover:bg-gray-200"
+                  className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 rounded-full px-8 h-12"
                 >
                   Trabajemos juntos
                 </Button>
@@ -247,9 +247,9 @@ export default function Home() {
               className="space-y-8"
             >
               {[
-                { title: "Transparencia Radical", desc: "Si no podemos ayudarte, te lo diremos. Si la IA no es la solución, también." },
-                { title: "Pragmatismo", desc: "Odiamos el 'hype'. Nos centramos en soluciones que funcionan hoy y traen dinero hoy." },
-                { title: "Excelencia Técnica", desc: "Combinamos ingeniería de software robusta con los últimos modelos de LLMs." }
+                { title: "Transparencia Radical", desc: "Si no podemos ayudarte, te lo diremos. Si la IA no es la solución, también.", iconColor: "text-[#3CB043]" },
+                { title: "Pragmatismo", desc: "Odiamos el 'hype'. Nos centramos en soluciones que funcionan hoy y traen dinero hoy.", iconColor: "text-[#FFA500]" },
+                { title: "Excelencia Técnica", desc: "Combinamos ingeniería de software robusta con los últimos modelos de LLMs.", iconColor: "text-[#1679bd]" }
               ].map((val, i) => (
                 <motion.div 
                   key={i}
@@ -257,14 +257,14 @@ export default function Home() {
                     hidden: { opacity: 0, x: 50 },
                     show: { opacity: 1, x: 0 }
                   }}
-                  className="flex gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
+                  className="flex gap-4 p-6 rounded-2xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 hover:shadow-sm"
                 >
                   <div className="mt-1">
-                    <CheckCircle2 className="w-6 h-6 text-primary" />
+                    <CheckCircle2 className={`w-8 h-8 ${val.iconColor}`} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">{val.title}</h3>
-                    <p className="text-gray-400">{val.desc}</p>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900">{val.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{val.desc}</p>
                   </div>
                 </motion.div>
               ))}
