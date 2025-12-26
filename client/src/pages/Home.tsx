@@ -301,29 +301,6 @@ export default function Home() {
 
       {/* FORM SECTION */}
       <ContactForm />
-
-      {/* FOOTER */}
-      <footer className="bg-white border-t py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="text-center md:text-left">
-              <div className="flex items-center gap-2 justify-center md:justify-start mb-4">
-                <img src={logoImg} alt="AICRON Logo" className="h-8 w-auto" />
-              </div>
-              <p className="text-muted-foreground text-sm max-w-md">
-                "La IA no es el futuro, es el presente. Las empresas que la adopten hoy liderarán sus mercados mañana."
-              </p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-8 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-primary transition-colors">Política de Privacidad</a>
-              <a href="#" className="hover:text-primary transition-colors">Términos de Servicio</a>
-              <span className="text-gray-300 hidden sm:inline">|</span>
-              <span>© {new Date().getFullYear()} AICRON. Todos los derechos reservados.</span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
