@@ -283,15 +283,15 @@ export default function Home() {
               <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -z-10 -translate-y-1/2" />
               
               {[
-                { step: "1", text: "Breve formulario inicial" },
-                { step: "2", text: "Llamada de exploración (20 min)" },
-                { step: "3", text: "Propuesta de valor personalizada" }
+                { step: "1", text: "Breve formulario inicial", bgColor: "bg-[#3CB043]", textColor: "text-white" },
+                { step: "2", text: "Llamada de exploración (20 min)", bgColor: "bg-[#FFFFFF]", textColor: "text-gray-800" },
+                { step: "3", text: "Propuesta de valor personalizada", bgColor: "bg-[#FFA500]", textColor: "text-white" }
               ].map((item, i) => (
                 <div key={i} className="bg-gray-50 px-4">
-                  <div className="w-12 h-12 rounded-full bg-white border-2 border-primary text-primary font-bold flex items-center justify-center text-lg mx-auto mb-4 shadow-sm relative z-10">
+                  <div className={`w-14 h-14 rounded-full ${item.bgColor} border-4 border-[#1679bd] ${item.textColor} font-bold flex items-center justify-center text-xl mx-auto mb-4 shadow-md relative z-10 transition-transform hover:scale-110 duration-300`}>
                     {item.step}
                   </div>
-                  <p className="font-medium text-gray-800">{item.text}</p>
+                  <p className="font-bold text-gray-900 max-w-[150px] mx-auto leading-tight">{item.text}</p>
                 </div>
               ))}
             </div>
