@@ -15,7 +15,17 @@ export const contactSubmissions = pgTable("contact_submissions", {
   webSocials: text("web_socials"),
 });
 
-export const insertContactSubmissionSchema = createInsertSchema(contactSubmissions).omit({ id: true });
+export const insertContactSubmissionSchema = createInsertSchema(contactSubmissions, {
+  name: z.string().min(1, "El nombre es obligatorio"),
+  company: z.string().min(1, "La empresa es obligatoria"),
+  position: z.string().min(1, "El cargo es obligatorio"),
+  revenue: z.string().min(1, "La facturación es obligatoria"),
+  email: z.string().email("Correo electrónico inválido").min(1, "El correo es obligatorio"),
+  phone: z.string().min(1, "El teléfono es obligatorio"),
+  processesToAutomate: z.string().min(1, "Describe al menos un proceso"),
+  businessType: z.string().min(1, "El tipo de negocio es obligatorio"),
+  webSocials: z.string().optional(),
+}).omit({ id: true });
 
 export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
 export type ContactSubmission = typeof contactSubmissions.$inferSelect;
