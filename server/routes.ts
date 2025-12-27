@@ -13,17 +13,24 @@ export async function registerRoutes(
       const input = api.contact.submit.input.parse(req.body);
       const submission = await storage.createContactSubmission(input);
       
-      // Webhook integration (e.g. Make/Zapier)
-      const WEBHOOK_URL = process.env.WEBHOOK_URL;
-      if (WEBHOOK_URL) {
-        fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            event: 'new_contact_submission',
-            data: submission
-          })
-        }).catch(err => console.error('Webhook error:', err));
+      // 🚀Send message to n8n workflow
+      const N8N_WEBHOOK_URL = process.env.WEBHOOK_URL;
+      if (N8N_WEBHOOK_URL) {
+        try {
+          const response = await fetch(N8N_WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message: submission,
+            }),
+          });
+          // Note: We don't await response.json() if we don't need to block the user response,
+          // but the user's snippet included it, so we'll log it for debugging.
+          const data = await response.json();
+          console.log('n8n response:', data);
+        } catch (err) {
+          console.error('n8n Webhook error:', err);
+        }
       }
 
       res.status(201).json(submission);
