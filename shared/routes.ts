@@ -23,6 +23,14 @@ export const api = {
         500: errorSchemas.internal,
       },
     },
+    list: {
+      method: 'GET' as const,
+      path: '/api/contact',
+      responses: {
+        200: z.array(z.custom<typeof contactSubmissions.$inferSelect>()),
+        500: errorSchemas.internal,
+      },
+    },
   },
 };
 
