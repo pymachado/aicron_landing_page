@@ -277,7 +277,3 @@ export function ContactForm() {
     </div>
   );
 }
-      </div>
-    </div>
-  );
-}
