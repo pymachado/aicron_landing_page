@@ -19,9 +19,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 export function ContactForm() {
-  const submitMutation = useSubmitContact();
+  const submitMutation = useSubmitContact();  
   const [showSuccess, setShowSuccess] = useState(false);
-  
+
   const form = useForm({
     resolver: zodResolver(insertContactSubmissionSchema),
     defaultValues: {
@@ -31,11 +31,18 @@ export function ContactForm() {
       revenue: "",
       email: "",
       phone: "",
+      countryCode: "+1",
+      language: "es",
       processesToAutomate: "",
       businessType: "",
       webSocials: "",
     },
   });
+
+  const selectGreenItem =
+  "data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white " +
+  "data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white " +
+  "focus:bg-[#3CB043] focus:text-white";
 
   const onSubmit = (data: any) => {
     submitMutation.mutate(data, {
@@ -55,7 +62,7 @@ export function ContactForm() {
       </div>
 
       <div className="container max-w-4xl mx-auto px-4 relative z-10">
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,17 +70,17 @@ export function ContactForm() {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">
-            Comienza Ahora
+            Get Started
           </span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">
-            Agenda tu Diagnóstico y Descubre el Potencial de tu Negocio
+            Schedule Your Diagnosis and Discover Your Business Potential
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Completa el formulario a continuación. Analizaremos tu caso y te contactaremos si vemos una oportunidad clara de impacto.
+            Fill out the form below. We will analyze your case and contact you if we see a clear opportunity for impact.
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -92,16 +99,16 @@ export function ContactForm() {
                 <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 text-green-600 mb-6">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">¡Gracias!</h3>
+                <h3 className="text-2xl font-bold mb-4">Thank You!</h3>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Ya hemos recibido y guardado tus datos. En las próximas 48 horas nos pondremos en contacto contigo.
+                  Thank you for providing your information. We will contact you within the next 48 hours.
                 </p>
-                <Button 
+                <Button
                   onClick={() => setShowSuccess(false)}
                   variant="outline"
                   className="rounded-xl h-12"
                 >
-                  Enviar otra respuesta
+                  Submit Another Response
                 </Button>
               </motion.div>
             ) : (
@@ -113,37 +120,9 @@ export function ContactForm() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Nombre completo</FormLabel>
+                          <FormLabel>Full Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Juan Pérez" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Correo electrónico</FormLabel>
-                          <FormControl>
-                            <Input placeholder="juan@empresa.com" type="email" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Teléfono / WhatsApp</FormLabel>
-                          <FormControl>
-                            <Input placeholder="+34 600 000 000" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                            <Input placeholder="John Smith" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -152,12 +131,82 @@ export function ContactForm() {
 
                     <FormField
                       control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email Address</FormLabel>
+                          <FormControl>
+                            <Input placeholder="john@company.com" type="email" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <div className="space-y-2">
+                      <FormLabel>Phone / WhatsApp</FormLabel>
+                      <div className="flex gap-2">
+                        <FormField
+                          control={form.control}
+                          name="countryCode"
+                          render={({ field }) => (
+                            <FormItem className="flex-shrink-0 w-[120px]">
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                  <SelectTrigger className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all">
+                                    <SelectValue placeholder="Code" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent className="max-h-[300px]">
+                                  <SelectItem value="+1" className={selectGreenItem}>🇺🇸 +1</SelectItem>
+                                  <SelectItem value="+34" className={selectGreenItem}>🇪🇸 +34</SelectItem>
+                                  <SelectItem value="+52" className={selectGreenItem}>🇲🇽 +52</SelectItem>
+                                  <SelectItem value="+54" className={selectGreenItem}>🇦🇷 +54</SelectItem>
+                                  <SelectItem value="+57" className={selectGreenItem}>🇨🇴 +57</SelectItem>
+                                  <SelectItem value="+56" className={selectGreenItem}>🇨🇱 +56</SelectItem>
+                                  <SelectItem value="+51" className={selectGreenItem}>🇵🇪 +51</SelectItem>
+                                  <SelectItem value="+58" className={selectGreenItem}>🇻🇪 +58</SelectItem>
+                                  <SelectItem value="+593" className={selectGreenItem}>🇪🇨 +593</SelectItem>
+                                  <SelectItem value="+502" className={selectGreenItem}>🇬🇹 +502</SelectItem>
+                                  <SelectItem value="+506" className={selectGreenItem}>🇨🇷 +506</SelectItem>
+                                  <SelectItem value="+507" className={selectGreenItem}>🇵🇦 +507</SelectItem>
+                                  <SelectItem value="+503" className={selectGreenItem}>🇸🇻 +503</SelectItem>
+                                  <SelectItem value="+504" className={selectGreenItem}>🇭🇳 +504</SelectItem>
+                                  <SelectItem value="+505" className={selectGreenItem}>🇳🇮 +505</SelectItem>
+                                  <SelectItem value="+595" className={selectGreenItem}>🇵🇾 +595</SelectItem>
+                                  <SelectItem value="+598" className={selectGreenItem}>🇺🇾 +598</SelectItem>
+                                  <SelectItem value="+591" className={selectGreenItem}>🇧🇴 +591</SelectItem>
+                                  <SelectItem value="+1-809" className={selectGreenItem}>🇩🇴 +1</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="phone"
+                          render={({ field }) => (
+                            <FormItem className="flex-grow">
+                              <FormControl>
+                                <Input placeholder="832 000 000" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+
+                    <FormField
+                      control={form.control}
                       name="company"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Nombre de la Empresa</FormLabel>
+                          <FormLabel>Company Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Mi Empresa S.L." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                            <Input placeholder="My Company LLC" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -169,9 +218,9 @@ export function ContactForm() {
                       name="position"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Cargo</FormLabel>
+                          <FormLabel>Position</FormLabel>
                           <FormControl>
-                            <Input placeholder="CEO, Director de Operaciones..." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                            <Input placeholder="CEO, Operations Director..." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -183,17 +232,17 @@ export function ContactForm() {
                       name="revenue"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Facturación Anual Aproximada (USD)</FormLabel>
+                          <FormLabel>Approximate Annual Revenue (USD)</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all">
-                                <SelectValue placeholder="Selecciona un rango" />
+                                <SelectValue placeholder="Select a range" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="<=150k">≤ 150K USD</SelectItem>
-                              <SelectItem value="500k">500K USD</SelectItem>
-                              <SelectItem value="10M">10M USD</SelectItem>
+                              <SelectItem value="<=150k" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">≤ 150K USD</SelectItem>
+                              <SelectItem value="500k" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">500K USD</SelectItem>
+                              <SelectItem value="10M" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">10M USD</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -206,9 +255,9 @@ export function ContactForm() {
                       name="businessType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Tipo de Negocio</FormLabel>
+                          <FormLabel>Business Type</FormLabel>
                           <FormControl>
-                            <Input placeholder="Ej. Agencia de marketing, Ecommerce de moda..." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                            <Input placeholder="E.g., Marketing Agency, Fashion Ecommerce..." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -220,9 +269,9 @@ export function ContactForm() {
                       name="webSocials"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Web o LinkedIn (Opcional)</FormLabel>
+                          <FormLabel>Website or LinkedIn (Optional)</FormLabel>
                           <FormControl>
-                            <Input placeholder="www.miempresa.com" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                            <Input placeholder="www.mycompany.com" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -230,17 +279,44 @@ export function ContactForm() {
                     />
                   </div>
 
+                    <FormField
+                      control={form.control}
+                      name="language"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Preferred Contact Language</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all">
+                                <SelectValue placeholder="Select a language" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="en" className={selectGreenItem}>
+                                English
+                              </SelectItem>
+                              <SelectItem value="es" className={selectGreenItem}>
+                                Español
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+
                   <FormField
                     control={form.control}
                     name="processesToAutomate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>¿Qué procesos te gustaría automatizar?</FormLabel>
+                        <FormLabel>Which processes would you like to automate?</FormLabel>
                         <FormControl>
-                          <Textarea 
-                            placeholder="Describe brevemente los procesos manuales que más tiempo consumen en tu equipo..." 
+                          <Textarea
+                            placeholder="Briefly describe the manual processes that consume the most time for your team..."
                             className="min-h-[120px] bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all resize-none"
-                            {...field} 
+                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
@@ -249,23 +325,23 @@ export function ContactForm() {
                   />
 
                   <div className="pt-4">
-                    <Button 
-                      type="submit" 
+                    <Button
+                      type="submit"
                       disabled={submitMutation.isPending}
                       className="w-full h-14 text-lg font-bold bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 rounded-xl"
                     >
                       {submitMutation.isPending ? (
                         <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Enviando...
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...
                         </>
                       ) : (
                         <>
-                          Solicitar Diagnóstico Gratuito <Send className="ml-2 h-5 w-5" />
+                          Request Free Diagnosis <Send className="ml-2 h-5 w-5" />
                         </>
                       )}
                     </Button>
                     <p className="text-center text-xs text-muted-foreground mt-4">
-                      Al enviar este formulario aceptas nuestra política de privacidad. Tus datos están seguros con nosotros.
+                      By submitting this form, you accept our privacy policy. Your data is safe with us.
                     </p>
                   </div>
                 </form>

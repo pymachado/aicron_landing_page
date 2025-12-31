@@ -42,8 +42,8 @@ export function useSubmitContact() {
     },
     onSuccess: () => {
       toast({
-        title: "¡Solicitud recibida!",
-        description: "Nos pondremos en contacto contigo pronto para agendar tu diagnóstico.",
+        title: "Request received!",
+        description: "We will be in touch with you soon to schedule your diagnosis.",
         variant: "default",
         className: "bg-primary text-primary-foreground border-none",
       });

@@ -46,19 +46,19 @@ export function Navigation() {
             onClick={() => document.getElementById("process")?.scrollIntoView({ behavior: "smooth" })}
             className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
           >
-            Proceso
+            Process
           </button>
           <button 
             onClick={() => document.getElementById("values")?.scrollIntoView({ behavior: "smooth" })}
             className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
           >
-            Filosofía
+            Philosophy
           </button>
           <Button 
             onClick={scrollToForm}
             className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 rounded-full px-6"
           >
-            Agendar Diagnóstico
+            Schedule Diagnosis
           </Button>
         </div>
 

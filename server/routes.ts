@@ -3,6 +3,7 @@ import type { Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
+import 'dotenv/config';
 
 export async function registerRoutes(
   httpServer: Server,
@@ -47,9 +48,12 @@ export async function registerRoutes(
 
   app.get(api.contact.list.path, async (_req, res) => {
     try {
+      
+      console.log('Datos recibidos:', _req.body);
       const submissions = await storage.getContactSubmissions();
       res.json(submissions);
     } catch (err) {
+      console.error('Error al guardar contacto:', err);
       res.status(500).json({ message: "Internal server error" });
     }
   });

@@ -9,23 +9,29 @@ export const contactSubmissions = pgTable("contact_submissions", {
   position: text("position").notNull(),
   revenue: text("revenue").notNull(),
   email: text("email").notNull(),
+  countryCode: text("country_code").notNull().default("+1"),
   phone: text("phone").notNull(),
   processesToAutomate: text("processes_to_automate").notNull(),
   businessType: text("business_type").notNull(),
+  language: text("contact_language").notNull().default("Español"),
   webSocials: text("web_socials"),
 });
 
+
 export const insertContactSubmissionSchema = createInsertSchema(contactSubmissions, {
-  name: z.string().min(1, "El nombre es obligatorio"),
-  company: z.string().min(1, "La empresa es obligatoria"),
-  position: z.string().min(1, "El cargo es obligatorio"),
-  revenue: z.string().min(1, "La facturación es obligatoria"),
-  email: z.string().email("Correo electrónico inválido").min(1, "El correo es obligatorio"),
-  phone: z.string().min(1, "El teléfono es obligatorio"),
-  processesToAutomate: z.string().min(1, "Describe al menos un proceso"),
-  businessType: z.string().min(1, "El tipo de negocio es obligatorio"),
+  name: z.string().min(1, "Full name is required"),
+  company: z.string().min(1, "Company name is required"),
+  position: z.string().min(1, "Position is required"),
+  revenue: z.string().min(1, "Annual revenue is required"),
+  email: z.string().email("Invalid email address").min(1, "Email address is required"),
+  countryCode: z.string().min(1, "Country code is required"),
+  phone: z.string().min(1, "Phone number is required"),
+  processesToAutomate: z.string().min(1, "Please describe at least one process"),
+  businessType: z.string().min(1, "Business type is required"),
+  language: z.string().min(1, "Preferred contact language is required"),
   webSocials: z.string().optional(),
 }).omit({ id: true });
+
 
 export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
 export type ContactSubmission = typeof contactSubmissions.$inferSelect;

@@ -52,16 +52,18 @@ export default function Home() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm mb-8">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-sm font-medium text-gray-600">Automatización Inteligente para Negocios</span>
+              <span className="text-sm font-medium text-gray-600">
+                Intelligent Automation for Businesses
+              </span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-balance bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 pb-2">
-              Optimiza tu negocio con <br/>
-              <span className="text-primary">Inteligencia Artificial</span>
+              Optimize your business with <br/>
+              <span className="text-primary">Artificial Intelligence</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto text-balance leading-relaxed">
-              Cada proceso manual es una fuga de rentabilidad. Transformamos tus operaciones para que escales sin aumentar estructura.
+              Every manual process is a profitability leak. We transform your operations so you can scale without increasing headcount.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
@@ -69,22 +71,22 @@ export default function Home() {
                 onClick={scrollToForm}
                 className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all"
               >
-                Agendar Diagnóstico Gratuito
+                Schedule Free Diagnosis
               </Button>
               <Button 
                 variant="outline" 
                 onClick={() => document.getElementById("process")?.scrollIntoView({ behavior: "smooth" })}
                 className="h-14 px-8 text-lg rounded-full border-2 hover:bg-gray-50"
               >
-                Ver cómo funciona
+                See how it works
               </Button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto text-left">
               {[
-                { icon: Zap, title: "Velocidad", text: "Procesos que tomaban días, ahora en segundos." },
-                { icon: Target, title: "Precisión", text: "Elimina el error humano de tus operaciones." },
-                { icon: BarChart3, title: "Rentabilidad", text: "Reduce costes operativos hasta un 40%." },
+                { icon: Zap, title: "Speed", text: "Processes that took days, now take seconds." },
+                { icon: Target, title: "Precision", text: "Eliminate human error from your operations." },
+                { icon: BarChart3, title: "Profitability", text: "Reduce operational costs by up to 40%." },
               ].map((item, i) => (
                 <motion.div 
                   key={i}
@@ -111,19 +113,20 @@ export default function Home() {
       <section className="py-20 bg-gray-50 border-y border-gray-100">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div 
-              {...fadeInUp}
-              className="space-y-6"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold">Si tu negocio sigue funcionando a base de hojas de cálculo y tareas repetitivas...</h2>
-              <p className="text-lg text-muted-foreground">Estás perdiendo ventaja competitiva cada día. La IA no es una moda, es el nuevo estándar de eficiencia operativa.</p>
+            <motion.div {...fadeInUp} className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                If your business still runs on spreadsheets and repetitive tasks...
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                You are losing competitive advantage every day. AI is not a trend — it is the new operational efficiency standard.
+              </p>
               
               <ul className="space-y-4 mt-6">
                 {[
-                  "Tu equipo pasa horas copiando datos de un sitio a otro",
-                  "La atención al cliente depende 100% de humanos y tiene demoras",
-                  "No tienes visibilidad en tiempo real de tus métricas clave",
-                  "Sientes que el crecimiento implica contratar más personal linealmente"
+                  "Your team spends hours copying data from one place to another",
+                  "Customer support depends 100% on humans and has delays",
+                  "You lack real-time visibility into your key metrics",
+                  "Growth feels like it requires hiring linearly"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <XCircle className="w-6 h-6 text-red-500 shrink-0 mt-0.5" />
@@ -140,17 +143,17 @@ export default function Home() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-bl-full -z-10" />
               <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 <ShieldCheck className="w-8 h-8 text-primary" />
-                Para quién es AICRON
+                Who AICRON is for
               </h3>
               <p className="text-gray-600 mb-6">
-                Nos especializamos en empresas establecidas que buscan eficiencia real. No somos una academia.
+                We specialize in established businesses seeking real efficiency. We are not an academy.
               </p>
               
               <div className="bg-orange-50 p-6 rounded-xl border border-orange-100">
-                <h4 className="font-bold text-orange-800 mb-2">Nota Importante:</h4>
+                <h4 className="font-bold text-orange-800 mb-2">Important note:</h4>
                 <p className="text-orange-700/90 text-sm">
-                  Si buscas cursos de "Cómo usar ChatGPT" o promesas de hacerse rico rápido, <span className="font-bold">AICRON no es para ti</span>. 
-                  Somos ingenieros de soluciones implementando sistemas robustos en negocios reales.
+                  If you are looking for “How to use ChatGPT” courses or get-rich-quick promises, <span className="font-bold">AICRON is not for you</span>. 
+                  We are solution engineers implementing robust systems in real businesses.
                 </p>
               </div>
             </motion.div>
@@ -161,13 +164,12 @@ export default function Home() {
       {/* VALUE PROP */}
       <section className="py-24" id="process">
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
-            {...fadeInUp}
-          >
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">No vendemos software, vendemos <span className="text-accent">resultados</span></h2>
+          <motion.div className="text-center max-w-3xl mx-auto mb-16" {...fadeInUp}>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              We don’t sell software, we sell <span className="text-accent">results</span>
+            </h2>
             <p className="text-xl text-muted-foreground">
-              Nuestra metodología se basa en entender tu negocio primero, y aplicar tecnología después.
+              Our methodology starts by understanding your business first, and applying technology second.
             </p>
           </motion.div>
 
@@ -180,18 +182,18 @@ export default function Home() {
           >
             {[
               {
-                title: "1. Diagnóstico Estratégico",
-                desc: "Analizamos tus flujos de trabajo actuales para identificar cuellos de botella y oportunidades de automatización de alto impacto.",
+                title: "1. Strategic Diagnosis",
+                desc: "We analyze your current workflows to identify bottlenecks and high-impact automation opportunities.",
                 color: "bg-primary"
               },
               {
-                title: "2. Implementación A Medida",
-                desc: "Desarrollamos e integramos las soluciones de IA sin interrumpir tu operativa diaria. Conectamos tus herramientas actuales.",
+                title: "2. Custom Implementation",
+                desc: "We develop and integrate AI solutions without disrupting daily operations. We connect your existing tools.",
                 color: "bg-secondary"
               },
               {
-                title: "3. Optimización Continua",
-                desc: "No te dejamos solo. Monitoreamos el rendimiento de las automatizaciones y ajustamos para maximizar el ROI constantemente.",
+                title: "3. Continuous Optimization",
+                desc: "We don’t disappear. We monitor performance and continuously adjust to maximize ROI.",
                 color: "bg-accent"
               }
             ].map((card, i) => (
@@ -216,7 +218,6 @@ export default function Home() {
 
       {/* DIFFERENTIATOR */}
       <section id="values" className="py-24 bg-white border-y border-gray-100 relative overflow-hidden">
-        {/* Abstract shapes with brand colors */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
 
@@ -224,17 +225,18 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div {...fadeInUp}>
               <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight text-gray-900">
-                Más partner que proveedor
+                More <span className="text-orange-500">partner</span> than
+                vendor
               </h2>
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                No somos una agencia que desaparece tras la entrega. Nos integramos como tu departamento de innovación externa.
+                We’re not an agency that disappears after delivery. We integrate as your external innovation department.
               </p>
               <div className="flex gap-4">
                 <Button 
                   onClick={scrollToForm}
                   className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 rounded-full px-8 h-12"
                 >
-                  Trabajemos juntos
+                  Let’s work together
                 </Button>
               </div>
             </motion.div>
@@ -247,9 +249,9 @@ export default function Home() {
               className="space-y-8"
             >
               {[
-                { title: "Transparencia Radical", desc: "Si no podemos ayudarte, te lo diremos. Si la IA no es la solución, también.", iconColor: "text-[#3CB043]" },
-                { title: "Pragmatismo", desc: "Odiamos el 'hype'. Nos centramos en soluciones que funcionan hoy y traen dinero hoy.", iconColor: "text-[#FFA500]" },
-                { title: "Excelencia Técnica", desc: "Combinamos ingeniería de software robusta con los últimos modelos de LLMs.", iconColor: "text-[#1679bd]" }
+                { title: "Radical Transparency", desc: "If we can’t help you, we’ll tell you. If AI isn’t the solution, we’ll say that too.", iconColor: "text-[#3CB043]" },
+                { title: "Pragmatism", desc: "We hate hype. We focus on solutions that work today and generate revenue today.", iconColor: "text-[#FFA500]" },
+                { title: "Technical Excellence", desc: "We combine robust software engineering with the latest LLM models.", iconColor: "text-[#1679bd]" }
               ].map((val, i) => (
                 <motion.div 
                   key={i}
@@ -277,15 +279,14 @@ export default function Home() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
           <motion.div {...fadeInUp} className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6">Qué ocurre cuando agendas</h2>
+            <h2 className="text-3xl font-bold mb-6">What happens when you schedule</h2>
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 mt-12 relative">
-              {/* Connecting line for desktop */}
               <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -z-10 -translate-y-1/2" />
               
               {[
-                { step: "1", text: "Breve formulario inicial", bgColor: "bg-[#3CB043]", textColor: "text-white" },
-                { step: "2", text: "Llamada de exploración (20 min)", bgColor: "bg-[#FFFFFF]", textColor: "text-gray-800" },
-                { step: "3", text: "Propuesta de valor personalizada", bgColor: "bg-[#FFA500]", textColor: "text-white" }
+                { step: "1", text: "Short initial form", bgColor: "bg-[#3CB043]", textColor: "text-white" },
+                { step: "2", text: "Discovery call (20 min)", bgColor: "bg-[#FFFFFF]", textColor: "text-gray-800" },
+                { step: "3", text: "Personalized value proposal", bgColor: "bg-[#FFA500]", textColor: "text-white" }
               ].map((item, i) => (
                 <div key={i} className="bg-gray-50 px-4">
                   <div className={`w-14 h-14 rounded-full ${item.bgColor} border-4 border-[#1679bd] ${item.textColor} font-bold flex items-center justify-center text-xl mx-auto mb-4 shadow-md relative z-10 transition-transform hover:scale-110 duration-300`}>
