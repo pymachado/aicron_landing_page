@@ -17,6 +17,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Loader2, Send, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { PrivacyPolicyDialog } from "./PrivacyPolicyDialog";
 
 export function ContactForm() {
   const submitMutation = useSubmitContact();  
@@ -341,7 +342,13 @@ export function ContactForm() {
                       )}
                     </Button>
                     <p className="text-center text-xs text-muted-foreground mt-4">
-                      By submitting this form, you accept our privacy policy. Your data is safe with us.
+                      By submitting this form, you accept our {" "} 
+                      <PrivacyPolicyDialog trigger= {
+                        <button type="button" className="underline hover:text-primary transition-colors">
+                        privacy policy.
+                        </button>
+                      }
+                      />. Your data is safe with us.
                     </p>
                   </div>
                 </form>
