@@ -149,6 +149,20 @@ export function PrivacyPolicyDialog({ trigger }: { trigger: React.ReactNode }) {
                               available through this website.
                         </p>
             </section>
+
+                      <section>
+                          <h3 className="text-lg font-semibold text-foreground">
+                              8. Contact
+                          </h3>
+                          <p>
+                              For any questions, inquiries, or requests regarding your personal data or this
+                              Privacy Policy, you may contact us at:
+                          </p>
+                          <p>
+                              <strong>AICRON</strong><br />
+                              Email: <a href="mailto:hello@aicron.cloud">hello@aicron.cloud</a>
+                          </p>
+                      </section>
           </div>
         </ScrollArea>
 
