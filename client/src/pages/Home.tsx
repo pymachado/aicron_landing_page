@@ -327,7 +327,7 @@ export default function Home() {
         </div>
       </section>
 
-      
+
       {/* DELIVERABLES SECTION */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -414,7 +414,7 @@ export default function Home() {
                 </p>
                 <div className="flex items-center gap-2 text-orange-600 font-bold">
                   <span className="text-xl">⚠️</span>
-                  <span>Limited to 3 companies per month</span>
+                  <span>Limited to 2 companies per month</span>
                 </div>
                 <p className="text-xs text-orange-600/80 mt-2">
                   To ensure technical quality, focus, and real results.
