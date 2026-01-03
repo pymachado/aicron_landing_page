@@ -327,6 +327,7 @@ export default function Home() {
         </div>
       </section>
 
+      
       {/* DELIVERABLES SECTION */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -343,12 +344,14 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               "Audit of key processes and current tools",
               "Analysis of real opportunities to integrate AI",
               "Personalized visual and technical roadmap",
+              "Assessment of operational and technical vulnerabilities",
               "Detailed technical report with next steps",
+              "Dedicated 1:1 walkthrough of the diagnosis deliverables"
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -356,7 +359,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start gap-3"
+                className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 
+                     flex items-start gap-3"
               >
                 <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-0.5" />
                 <span className="font-semibold text-gray-800">{item}</span>
@@ -365,6 +369,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* OFFER CONDITIONS */}
       <section className="py-24 bg-white border-y border-gray-100">
