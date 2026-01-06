@@ -17,6 +17,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Loader2, Send, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { PrivacyPolicyDialog } from "./PrivacyPolicyDialog";
 
 export function ContactForm() {
   const submitMutation = useSubmitContact();  
@@ -73,10 +74,10 @@ export function ContactForm() {
             Get Started
           </span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">
-            Schedule Your Diagnosis and Discover Your Business Potential
+            Hire Your AI Automation Diagnosis
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Fill out the form below. We will analyze your case and contact you if we see a clear opportunity for impact.
+            Zero risk · Clarity before implementation · Focused on real ROI
           </p>
         </motion.div>
 
@@ -336,12 +337,18 @@ export function ContactForm() {
                         </>
                       ) : (
                         <>
-                          Request Free Diagnosis <Send className="ml-2 h-5 w-5" />
+                          Hire a Personalized Diagnosis <Send className="ml-2 h-5 w-5" />
                         </>
                       )}
                     </Button>
                     <p className="text-center text-xs text-muted-foreground mt-4">
-                      By submitting this form, you accept our privacy policy. Your data is safe with us.
+                      By submitting this form, you accept our {" "} 
+                      <PrivacyPolicyDialog trigger= {
+                        <button type="button" className="underline hover:text-primary transition-colors">
+                        privacy policy.
+                        </button>
+                      }
+                      />. Your data is safe with us.
                     </p>
                   </div>
                 </form>

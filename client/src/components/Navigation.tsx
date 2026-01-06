@@ -58,7 +58,8 @@ export function Navigation() {
             onClick={scrollToForm}
             className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 rounded-full px-6"
           >
-            Schedule Diagnosis
+            Hire a Personalized Diagnosis
+
           </Button>
         </div>
 
@@ -87,7 +88,7 @@ export function Navigation() {
               }}
               className="text-left font-medium p-2 hover:bg-muted rounded-lg"
             >
-              Proceso
+              Process
             </button>
             <button 
               onClick={() => {
@@ -96,10 +97,10 @@ export function Navigation() {
               }}
               className="text-left font-medium p-2 hover:bg-muted rounded-lg"
             >
-              Filosofía
+              Philosophy
             </button>
             <Button onClick={scrollToForm} className="w-full">
-              Agendar Diagnóstico
+              Hire a Diagnosis
             </Button>
           </div>
         </motion.div>
