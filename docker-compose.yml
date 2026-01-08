@@ -1,27 +1,8 @@
 services:
-  db:
-    image: postgres:16-alpine
-    container_name: aicron_db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: aicron_db
-      POSTGRES_DB: aicron_db
-    ports:
-      - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
-
   aicron:
     build: .
-    container_name: aicron_app
     ports:
       - "5000:5000"
-    env_file:
-      - .env
-    depends_on:
-      - db
     environment:
-      DATABASE_URL: postgresql://postgres:aicron_db@db:5432/aicron_db?sslmode=disable
-
-volumes:
-  db_data:
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL}
