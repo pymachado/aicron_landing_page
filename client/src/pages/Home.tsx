@@ -390,7 +390,7 @@ export default function Home() {
                   <div>
                     <h4 className="font-bold text-gray-900 mb-1">Investment</h4>
                     <p className="text-2xl font-bold text-primary">
-                      Starting at $2,499 USD
+                      Starting at $499 USD
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">
                       *(final price depends on scope and analysis complexity)*
