@@ -29,7 +29,7 @@ export function ContactForm() {
       name: "",
       company: "",
       position: "",
-      revenue: "",
+      size: "",
       email: "",
       phone: "",
       countryCode: "+1",
@@ -230,10 +230,10 @@ export function ContactForm() {
 
                     <FormField
                       control={form.control}
-                      name="revenue"
+                      name="size"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Approximate Annual Revenue (USD)</FormLabel>
+                          <FormLabel>Which best describes the current size of your business?</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all">
@@ -241,9 +241,9 @@ export function ContactForm() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="<=150k" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">≤ 150K USD</SelectItem>
-                              <SelectItem value="500k" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">500K USD</SelectItem>
-                              <SelectItem value="10M" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">10M USD</SelectItem>
+                              <SelectItem value="Small (1–5 employees)" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">Small (1–5 employees)</SelectItem>
+                              <SelectItem value="Medium (5–20 employees)" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">Medium (5–20 employees)</SelectItem>
+                              <SelectItem value="Growing (20+ employees)" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">Growing (20+ employees)</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
