@@ -1,0 +1,18 @@
+{
+  "name": "AICRON — AI Automation",
+  "short_name": "AICRON",
+  "description": "Agencia de automatización con IA y blockchain para empresas B2B en LATAM y USA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1729",
+  "theme_color": "#3CB043",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
