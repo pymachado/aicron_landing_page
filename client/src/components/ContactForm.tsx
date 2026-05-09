@@ -18,51 +18,73 @@ import { Loader2, Send, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { PrivacyPolicyDialog } from "./PrivacyPolicyDialog";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const inputCls = "h-12 bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-600 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all dark:text-white dark:placeholder:text-slate-400";
+const selectGreenItem =
+  "data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white " +
+  "data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white " +
+  "focus:bg-[#3CB043] focus:text-white";
 
 export function ContactForm() {
-  const submitMutation = useSubmitContact();  
+  const submitMutation = useSubmitContact();
   const [showSuccess, setShowSuccess] = useState(false);
+  const [availability, setAvailability] = useState("");
+  const [availabilityTime, setAvailabilityTime] = useState("");
+  const { t, language } = useLanguage();
+  const f = t.form;
 
   const form = useForm({
     resolver: zodResolver(insertContactSubmissionSchema),
     defaultValues: {
       name: "",
       company: "",
-      position: "",
-      revenue: "",
       email: "",
       phone: "",
       countryCode: "+1",
-      language: "es",
-      processesToAutomate: "",
+      language: language,
+      mainChallenge: "",
       businessType: "",
       webSocials: "",
     },
   });
 
-  const selectGreenItem =
-  "data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white " +
-  "data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white " +
-  "focus:bg-[#3CB043] focus:text-white";
-
   const onSubmit = (data: any) => {
-    submitMutation.mutate(data, {
-      onSuccess: () => {
-        form.reset();
-        setShowSuccess(true);
+    const availabilityNote = [
+      availability && `${f.fields.availability}: ${availability}`,
+      availabilityTime && `${f.fields.availabilityTime}: ${availabilityTime}`,
+    ]
+      .filter(Boolean)
+      .join(" | ");
+
+    const fullChallenge = availabilityNote
+      ? `${data.mainChallenge}\n\n— ${availabilityNote}`
+      : data.mainChallenge;
+
+    submitMutation.mutate(
+      { ...data, mainChallenge: fullChallenge },
+      {
+        onSuccess: () => {
+          form.reset();
+          setAvailability("");
+          setAvailabilityTime("");
+          setShowSuccess(true);
+        },
       }
-    });
+    );
   };
 
   return (
-    <div id="contact-form" className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-      {/* Background decoration */}
+    <div
+      id="contact-form"
+      className="py-24 bg-gradient-to-b from-white dark:from-slate-900 to-gray-50 dark:to-slate-900/80 relative overflow-hidden"
+    >
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="container max-w-4xl mx-auto px-4 relative z-10">
+      <div className="container max-w-3xl mx-auto px-4 relative z-10">
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -71,18 +93,20 @@ export function ContactForm() {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">
-            Get Started
+            {f.badge}
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">
-            Hire Your AI Automation Diagnosis
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance dark:text-white">
+            {f.title}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Zero risk · Clarity before implementation · Focused on real ROI
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">{f.subtitle}</p>
+          <p className="text-sm text-muted-foreground flex items-center justify-center gap-1.5">
+            <span>📍</span>
+            <span>{f.location}</span>
           </p>
         </motion.div>
 
         <motion.div
-          className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-10"
+          className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700 p-6 md:p-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -100,98 +124,87 @@ export function ContactForm() {
                 <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 text-green-600 mb-6">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">Thank You!</h3>
-                <p className="text-lg text-muted-foreground mb-8">
-                  Thank you for providing your information. We will contact you within the next 48 hours.
-                </p>
-                <Button
-                  onClick={() => setShowSuccess(false)}
-                  variant="outline"
-                  className="rounded-xl h-12"
-                >
-                  Submit Another Response
+                <h3 className="text-2xl font-bold mb-4 dark:text-white">{f.success.title}</h3>
+                <p className="text-lg text-muted-foreground mb-8">{f.success.message}</p>
+                <Button onClick={() => setShowSuccess(false)} variant="outline" className="rounded-xl h-12">
+                  {f.success.reset}
                 </Button>
               </motion.div>
             ) : (
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+
+                  {/* Fila 1: Nombre + Email */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <FormField
                       control={form.control}
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Full Name</FormLabel>
+                          <FormLabel>{f.fields.name}</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Smith" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                            <Input placeholder={f.fields.namePlaceholder} className={inputCls} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email Address</FormLabel>
+                          <FormLabel>{f.fields.email}</FormLabel>
                           <FormControl>
-                            <Input placeholder="john@company.com" type="email" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                            <Input placeholder={f.fields.emailPlaceholder} type="email" className={inputCls} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+                  </div>
 
+                  {/* Fila 2: Teléfono + Empresa */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <FormLabel>Phone / WhatsApp</FormLabel>
+                      <FormLabel>{f.fields.phone}</FormLabel>
                       <div className="flex gap-2">
                         <FormField
                           control={form.control}
                           name="countryCode"
                           render={({ field }) => (
-                            <FormItem className="flex-shrink-0 w-[120px]">
+                            <FormItem className="flex-shrink-0 w-[110px]">
                               <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
-                                  <SelectTrigger className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all">
-                                    <SelectValue placeholder="Code" />
+                                  <SelectTrigger className={inputCls}>
+                                    <SelectValue />
                                   </SelectTrigger>
                                 </FormControl>
-                                <SelectContent className="max-h-[300px]">
-                                  <SelectItem value="+1" className={selectGreenItem}>🇺🇸 +1</SelectItem>
-                                  <SelectItem value="+34" className={selectGreenItem}>🇪🇸 +34</SelectItem>
-                                  <SelectItem value="+52" className={selectGreenItem}>🇲🇽 +52</SelectItem>
-                                  <SelectItem value="+54" className={selectGreenItem}>🇦🇷 +54</SelectItem>
-                                  <SelectItem value="+57" className={selectGreenItem}>🇨🇴 +57</SelectItem>
-                                  <SelectItem value="+56" className={selectGreenItem}>🇨🇱 +56</SelectItem>
-                                  <SelectItem value="+51" className={selectGreenItem}>🇵🇪 +51</SelectItem>
-                                  <SelectItem value="+58" className={selectGreenItem}>🇻🇪 +58</SelectItem>
-                                  <SelectItem value="+593" className={selectGreenItem}>🇪🇨 +593</SelectItem>
-                                  <SelectItem value="+502" className={selectGreenItem}>🇬🇹 +502</SelectItem>
-                                  <SelectItem value="+506" className={selectGreenItem}>🇨🇷 +506</SelectItem>
-                                  <SelectItem value="+507" className={selectGreenItem}>🇵🇦 +507</SelectItem>
-                                  <SelectItem value="+503" className={selectGreenItem}>🇸🇻 +503</SelectItem>
-                                  <SelectItem value="+504" className={selectGreenItem}>🇭🇳 +504</SelectItem>
-                                  <SelectItem value="+505" className={selectGreenItem}>🇳🇮 +505</SelectItem>
-                                  <SelectItem value="+595" className={selectGreenItem}>🇵🇾 +595</SelectItem>
-                                  <SelectItem value="+598" className={selectGreenItem}>🇺🇾 +598</SelectItem>
-                                  <SelectItem value="+591" className={selectGreenItem}>🇧🇴 +591</SelectItem>
-                                  <SelectItem value="+1-809" className={selectGreenItem}>🇩🇴 +1</SelectItem>
+                                <SelectContent className="max-h-[280px]">
+                                  {[
+                                    ["+1","🇺🇸"],["+34","🇪🇸"],["+52","🇲🇽"],["+54","🇦🇷"],
+                                    ["+57","🇨🇴"],["+56","🇨🇱"],["+51","🇵🇪"],["+58","🇻🇪"],
+                                    ["+593","🇪🇨"],["+502","🇬🇹"],["+506","🇨🇷"],["+507","🇵🇦"],
+                                    ["+503","🇸🇻"],["+504","🇭🇳"],["+505","🇳🇮"],["+595","🇵🇾"],
+                                    ["+598","🇺🇾"],["+591","🇧🇴"],["+1-809","🇩🇴"],
+                                  ].map(([code, flag]) => (
+                                    <SelectItem key={code} value={code} className={selectGreenItem}>
+                                      {flag} {code}
+                                    </SelectItem>
+                                  ))}
                                 </SelectContent>
                               </Select>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
-
                         <FormField
                           control={form.control}
                           name="phone"
                           render={({ field }) => (
                             <FormItem className="flex-grow">
                               <FormControl>
-                                <Input placeholder="832 000 000" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                                <Input placeholder="832 000 0000" className={inputCls} {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -205,74 +218,9 @@ export function ContactForm() {
                       name="company"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Company Name</FormLabel>
+                          <FormLabel>{f.fields.company}</FormLabel>
                           <FormControl>
-                            <Input placeholder="My Company LLC" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="position"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Position</FormLabel>
-                          <FormControl>
-                            <Input placeholder="CEO, Operations Director..." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="revenue"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Approximate Annual Revenue (USD)</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all">
-                                <SelectValue placeholder="Select a range" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="<=150k" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">≤ 150K USD</SelectItem>
-                              <SelectItem value="500k" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">500K USD</SelectItem>
-                              <SelectItem value="10M" className="data-[highlighted]:bg-[#3CB043] data-[highlighted]:text-white data-[state=checked]:bg-[#3CB043] data-[state=checked]:text-white focus:bg-[#3CB043] focus:text-white">10M USD</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="businessType"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Business Type</FormLabel>
-                          <FormControl>
-                            <Input placeholder="E.g., Marketing Agency, Fashion Ecommerce..." className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="webSocials"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Website or LinkedIn (Optional)</FormLabel>
-                          <FormControl>
-                            <Input placeholder="www.mycompany.com" className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all" {...field} />
+                            <Input placeholder={f.fields.companyPlaceholder} className={inputCls} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -280,43 +228,70 @@ export function ContactForm() {
                     />
                   </div>
 
+                  {/* Fila 3: Tipo de negocio + Idioma */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <FormField
+                      control={form.control}
+                      name="businessType"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{f.fields.businessType}</FormLabel>
+                          <FormControl>
+                            <Input placeholder={f.fields.businessTypePlaceholder} className={inputCls} {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                     <FormField
                       control={form.control}
                       name="language"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Preferred Contact Language</FormLabel>
+                          <FormLabel>{f.fields.language}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
-                              <SelectTrigger className="h-12 bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all">
-                                <SelectValue placeholder="Select a language" />
+                              <SelectTrigger className={inputCls}>
+                                <SelectValue />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="en" className={selectGreenItem}>
-                                English
-                              </SelectItem>
-                              <SelectItem value="es" className={selectGreenItem}>
-                                Español
-                              </SelectItem>
+                              <SelectItem value="en" className={selectGreenItem}>English</SelectItem>
+                              <SelectItem value="es" className={selectGreenItem}>Español</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+                  </div>
 
-
+                  {/* Sitio web (opcional) */}
                   <FormField
                     control={form.control}
-                    name="processesToAutomate"
+                    name="webSocials"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Which processes would you like to automate?</FormLabel>
+                        <FormLabel>{f.fields.webSocials}</FormLabel>
+                        <FormControl>
+                          <Input placeholder={f.fields.webSocialsPlaceholder} className={inputCls} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Desafío principal */}
+                  <FormField
+                    control={form.control}
+                    name="mainChallenge"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{f.fields.mainChallenge}</FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Briefly describe the manual processes that consume the most time for your team..."
-                            className="min-h-[120px] bg-white border-gray-200 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all resize-none"
+                            placeholder={f.fields.mainChallengePlaceholder}
+                            className="min-h-[110px] bg-white dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-400 border-gray-200 dark:border-slate-600 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all resize-none"
                             {...field}
                           />
                         </FormControl>
@@ -325,30 +300,63 @@ export function ContactForm() {
                     )}
                   />
 
-                  <div className="pt-4">
+                  {/* Disponibilidad */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <FormLabel>{f.fields.availability}</FormLabel>
+                      <Select onValueChange={setAvailability} value={availability}>
+                        <SelectTrigger className={inputCls}>
+                          <SelectValue placeholder={f.fields.availabilityPlaceholder} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {f.fields.availabilityOptions.map((opt) => (
+                            <SelectItem key={opt} value={opt} className={selectGreenItem}>
+                              {opt}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <FormLabel>{f.fields.availabilityTime}</FormLabel>
+                      <Select onValueChange={setAvailabilityTime} value={availabilityTime}>
+                        <SelectTrigger className={inputCls}>
+                          <SelectValue placeholder={f.fields.availabilityTimePlaceholder} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {f.fields.availabilityTimeOptions.map((opt) => (
+                            <SelectItem key={opt} value={opt} className={selectGreenItem}>
+                              {opt}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
                     <Button
                       type="submit"
                       disabled={submitMutation.isPending}
                       className="w-full h-14 text-lg font-bold bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 rounded-xl"
                     >
                       {submitMutation.isPending ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...
-                        </>
+                        <><Loader2 className="mr-2 h-5 w-5 animate-spin" />{f.submitting}</>
                       ) : (
-                        <>
-                          Hire a Personalized Diagnosis <Send className="ml-2 h-5 w-5" />
-                        </>
+                        <>{f.submit} <Send className="ml-2 h-5 w-5" /></>
                       )}
                     </Button>
                     <p className="text-center text-xs text-muted-foreground mt-4">
-                      By submitting this form, you accept our {" "} 
-                      <PrivacyPolicyDialog trigger= {
-                        <button type="button" className="underline hover:text-primary transition-colors">
-                        privacy policy.
-                        </button>
-                      }
-                      />. Your data is safe with us.
+                      {f.privacy}{" "}
+                      <PrivacyPolicyDialog
+                        trigger={
+                          <button type="button" className="underline hover:text-primary transition-colors">
+                            {f.privacyLink}
+                          </button>
+                        }
+                      />
+                      {f.privacySuffix}
                     </p>
                   </div>
                 </form>
