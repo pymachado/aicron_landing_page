@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://aicron.cloud/</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aicron.cloud/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aicron.cloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aicron.cloud/"/>
+  </url>
+
+  <url>
+    <loc>https://aicron.cloud/services</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aicron.cloud/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aicron.cloud/services"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aicron.cloud/services"/>
+  </url>
+
+  <url>
+    <loc>https://aicron.cloud/about</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aicron.cloud/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aicron.cloud/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aicron.cloud/about"/>
+  </url>
+
+</urlset>

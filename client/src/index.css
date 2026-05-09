@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -36,6 +34,38 @@
   --radius: 0.75rem;
 }
 
+.dark {
+  --background: 222 47% 8%;
+  --foreground: 210 40% 96%;
+
+  --primary: 124 48% 46%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 39 100% 50%;
+  --secondary-foreground: 0 0% 100%;
+
+  --accent: 204 76% 41%;
+  --accent-foreground: 0 0% 100%;
+
+  --card: 222 40% 12%;
+  --card-foreground: 210 40% 96%;
+  --card-border: 220 25% 20%;
+
+  --popover: 222 40% 12%;
+  --popover-foreground: 210 40% 96%;
+  --popover-border: 220 25% 20%;
+
+  --muted: 220 25% 18%;
+  --muted-foreground: 215 20% 60%;
+
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 220 25% 20%;
+  --input: 220 25% 20%;
+  --ring: 124 48% 46%;
+}
+
 @layer base {
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/20;
@@ -60,5 +90,10 @@
   .hero-gradient {
     background: radial-gradient(circle at top right, rgba(60, 176, 67, 0.1), transparent 40%),
                 radial-gradient(circle at bottom left, rgba(22, 121, 189, 0.1), transparent 40%);
+  }
+
+  .dark .hero-gradient {
+    background: radial-gradient(circle at top right, rgba(60, 176, 67, 0.06), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(22, 121, 189, 0.06), transparent 40%);
   }
 }
