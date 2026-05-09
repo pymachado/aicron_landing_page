@@ -14,7 +14,7 @@ interface RouteMeta {
   canonical: string;
 }
 
-const BASE_URL = "https://aicron.cloud";
+const BASE_URL = process.env.BASE_URL ?? "https://aicron.cloud";
 
 const routeMeta: Record<string, Record<Lang, RouteMeta>> = {
   "/": {
