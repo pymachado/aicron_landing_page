@@ -31,6 +31,7 @@ export function ContactForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [availability, setAvailability] = useState("");
   const [availabilityTime, setAvailabilityTime] = useState("");
+  const [source, setSource] = useState("");
   const { t, language } = useLanguage();
   const f = t.form;
 
@@ -62,12 +63,13 @@ export function ContactForm() {
       : data.mainChallenge;
 
     submitMutation.mutate(
-      { ...data, mainChallenge: fullChallenge },
+      { ...data, mainChallenge: fullChallenge, source: source || undefined },
       {
         onSuccess: () => {
           form.reset();
           setAvailability("");
           setAvailabilityTime("");
+          setSource("");
           setShowSuccess(true);
         },
       }
@@ -333,6 +335,23 @@ export function ContactForm() {
                         </SelectContent>
                       </Select>
                     </div>
+                  </div>
+
+                  {/* Fuente de contacto */}
+                  <div className="space-y-2">
+                    <FormLabel>{f.fields.source}</FormLabel>
+                    <Select onValueChange={setSource} value={source}>
+                      <SelectTrigger className={inputCls}>
+                        <SelectValue placeholder={f.fields.sourcePlaceholder} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {f.fields.sourceOptions.map((opt) => (
+                          <SelectItem key={opt} value={opt} className={selectGreenItem}>
+                            {opt}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="pt-2">
