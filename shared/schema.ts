@@ -26,6 +26,7 @@ export const insertContactSubmissionSchema = createInsertSchema(contactSubmissio
   language: z.string().min(1, "Preferred contact language is required"),
   mainChallenge: z.string().min(10, "Please describe your main challenge (min. 10 characters)"),
   webSocials: z.string().optional(),
+  source: z.string().optional(),
 }).omit({ id: true });
 
 
