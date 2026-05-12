@@ -13,6 +13,7 @@ export const contactSubmissions = pgTable("contact_submissions", {
   language: text("contact_language").notNull().default("es"),
   mainChallenge: text("main_challenge").notNull(),
   webSocials: text("web_socials"),
+  source: text("source"),
 });
 
 
