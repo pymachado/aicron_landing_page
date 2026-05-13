@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackEvent } from "@/hooks/use-analytics";
 import { useState, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -23,6 +24,7 @@ export function Navigation() {
   }, [scrollY]);
 
   const goToSection = (sectionId: string) => {
+    trackEvent("nav_click", { section: sectionId });
     setIsMobileMenuOpen(false);
     if (location === "/") {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -32,6 +34,7 @@ export function Navigation() {
   };
 
   const scrollToForm = () => {
+    trackEvent("cta_click", { section: "nav" });
     setIsMobileMenuOpen(false);
     if (location === "/") {
       document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });

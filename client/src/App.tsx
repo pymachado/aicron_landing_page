@@ -8,6 +8,7 @@ import Home from "@/pages/Home";
 import Services from "@/pages/Services";
 import About from "@/pages/About";
 import NotFound from "@/pages/not-found";
+import { usePageView } from "@/hooks/use-analytics";
 
 function ScrollReset() {
   const [location] = useLocation();
@@ -32,6 +33,7 @@ function ScrollReset() {
 }
 
 function Router() {
+  usePageView();
   return (
     <>
       <ScrollReset />
