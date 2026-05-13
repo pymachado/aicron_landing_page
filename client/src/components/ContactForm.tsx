@@ -51,9 +51,12 @@ export function ContactForm() {
   });
 
   const onSubmit = (data: any) => {
+    const availabilityLabel = f.fields.availabilityOptions.find(o => o.value === availability)?.label ?? availability;
+    const availabilityTimeLabel = f.fields.availabilityTimeOptions.find(o => o.value === availabilityTime)?.label ?? availabilityTime;
+
     const availabilityNote = [
-      availability && `${f.fields.availability}: ${availability}`,
-      availabilityTime && `${f.fields.availabilityTime}: ${availabilityTime}`,
+      availability && `${f.fields.availability}: ${availabilityLabel}`,
+      availabilityTime && `${f.fields.availabilityTime}: ${availabilityTimeLabel}`,
     ]
       .filter(Boolean)
       .join(" | ");
@@ -312,8 +315,8 @@ export function ContactForm() {
                         </SelectTrigger>
                         <SelectContent>
                           {f.fields.availabilityOptions.map((opt) => (
-                            <SelectItem key={opt} value={opt} className={selectGreenItem}>
-                              {opt}
+                            <SelectItem key={opt.value} value={opt.value} className={selectGreenItem}>
+                              {opt.label}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -328,8 +331,8 @@ export function ContactForm() {
                         </SelectTrigger>
                         <SelectContent>
                           {f.fields.availabilityTimeOptions.map((opt) => (
-                            <SelectItem key={opt} value={opt} className={selectGreenItem}>
-                              {opt}
+                            <SelectItem key={opt.value} value={opt.value} className={selectGreenItem}>
+                              {opt.label}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -346,8 +349,8 @@ export function ContactForm() {
                       </SelectTrigger>
                       <SelectContent>
                         {f.fields.sourceOptions.map((opt) => (
-                          <SelectItem key={opt} value={opt} className={selectGreenItem}>
-                            {opt}
+                          <SelectItem key={opt.value} value={opt.value} className={selectGreenItem}>
+                            {opt.label}
                           </SelectItem>
                         ))}
                       </SelectContent>
