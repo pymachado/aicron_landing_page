@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { GlobalParticles } from "@/components/GlobalParticles";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackEvent } from "@/hooks/use-analytics";
 import logoImg from "@assets/logo_280_9x95_1_1766715570899a.png";
 import logoDarkImg from "@assets/logo_dark.png";
 import { Link } from "wouter";
@@ -31,7 +32,8 @@ export default function Home() {
   const { t } = useLanguage();
   const h = t.home;
 
-  const scrollToForm = () => {
+  const scrollToForm = (section: string) => {
+    trackEvent("cta_click", { section });
     document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -108,7 +110,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
               <Button
-                onClick={scrollToForm}
+                onClick={() => scrollToForm("hero")}
                 className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all"
               >
                 {h.hero.ctaPrimary}
@@ -235,7 +237,7 @@ export default function Home() {
                 {h.howWeWork.subtitle}
               </p>
               <Button
-                onClick={scrollToForm}
+                onClick={() => scrollToForm("how_we_work")}
                 className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 rounded-full px-8 h-12"
               >
                 {h.howWeWork.cta}
@@ -467,7 +469,7 @@ export default function Home() {
               </div>
 
               <Button
-                onClick={scrollToForm}
+                onClick={() => scrollToForm("exploration")}
                 className="w-full h-14 text-lg font-bold rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 hover:-translate-y-1 transition-all"
               >
                 {h.exploration.cta}
@@ -504,7 +506,7 @@ export default function Home() {
             </h2>
             <p className="text-xl text-gray-400 mb-10">{h.closing.subtitle}</p>
             <Button
-              onClick={scrollToForm}
+              onClick={() => scrollToForm("closing")}
               className="h-16 px-10 text-xl font-bold rounded-full bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/20 hover:scale-105 transition-all"
             >
               {h.closing.cta}

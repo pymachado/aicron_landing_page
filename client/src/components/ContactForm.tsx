@@ -19,6 +19,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { PrivacyPolicyDialog } from "./PrivacyPolicyDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackEvent } from "@/hooks/use-analytics";
 
 const inputCls = "h-12 bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-600 focus:ring-2 focus:ring-[#3CB043] focus:border-[#3CB043] transition-all dark:text-white dark:placeholder:text-slate-400";
 const selectGreenItem =
@@ -69,6 +70,7 @@ export function ContactForm() {
       { ...data, mainChallenge: fullChallenge, source: source || undefined },
       {
         onSuccess: () => {
+          trackEvent("form_submit_success", { source: source || "none" });
           form.reset();
           setAvailability("");
           setAvailabilityTime("");
