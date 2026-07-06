@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO + Google Analytics 4 — Guía AICRON</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: #1a1a2e;
+      background: #ffffff;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 50px;
+    }
+
+    .header {
+      border-left: 5px solid #1679bd;
+      padding: 6px 0 6px 20px;
+      margin-bottom: 40px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #1679bd;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #0f0f1a;
+    }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1679bd;
+      margin-top: 38px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #d0e8f7;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: #2d2d3a;
+    }
+
+    .error-box {
+      background: #fff8f0;
+      border: 1px solid #ffd080;
+      border-left: 4px solid #FFA500;
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #7a4500;
+      line-height: 1.6;
+    }
+
+    .flow-box {
+      background: #f0f8ff;
+      border: 1px solid #b3d9f2;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 20px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #0d3f62;
+      line-height: 1.9;
+      white-space: pre;
+    }
+
+    .hypothesis-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #374151;
+      line-height: 1.8;
+    }
+
+    .hypothesis-box.fail {
+      border-left: 4px solid #FFA500;
+      background: #fff8f0;
+      color: #5a3800;
+    }
+
+    .hypothesis-box.success {
+      border-left: 4px solid #3CB043;
+      background: #f2fbf2;
+      color: #1a4d1e;
+    }
+
+    .stat-box {
+      background: #fff8f0;
+      border: 1px solid #ffd080;
+      border-left: 4px solid #FFA500;
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-size: 14px;
+      color: #7a4500;
+      line-height: 1.7;
+    }
+
+    .stat-box strong {
+      font-size: 22px;
+      display: block;
+      margin-bottom: 4px;
+      color: #d97706;
+    }
+
+    .check-box {
+      background: #f2fbf2;
+      border: 1px solid #a3d9a5;
+      border-left: 4px solid #3CB043;
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #1a4d1e;
+      line-height: 1.8;
+    }
+
+    .check-box .check-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 14.5px;
+    }
+
+    .steps {
+      margin: 16px 0;
+      padding-left: 0;
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .steps li {
+      counter-increment: steps;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+
+    .steps li::before {
+      content: counter(steps);
+      background: #1679bd;
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .steps li span {
+      color: #2d2d3a;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #d0e8f7;
+      margin: 36px 0;
+    }
+
+    .highlight {
+      background: #e8f4fd;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #1679bd;
+    }
+
+    .callout {
+      background: #e8f4fd;
+      border-left: 4px solid #1679bd;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 24px 0;
+      color: #0d3f62;
+      font-size: 14.5px;
+    }
+
+    .trio {
+      display: flex;
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .trio-card {
+      flex: 1;
+      border: 1px solid #d0e8f7;
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .trio-card .card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #1679bd;
+      margin-bottom: 6px;
+    }
+
+    .trio-card p {
+      font-size: 13px;
+      margin: 0;
+      color: #4b5563;
+    }
+
+    .code-block {
+      background: #0f172a;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #e2e8f0;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+
+    .code-block .comment {
+      color: #64748b;
+    }
+
+    .code-block .key {
+      color: #7dd3fc;
+    }
+
+    .code-block .value {
+      color: #86efac;
+    }
+
+    .footer {
+      margin-top: 52px;
+      padding-top: 20px;
+      border-top: 1px solid #d0e8f7;
+      font-size: 12px;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer a {
+      color: #1679bd;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      body {
+        padding: 40px 44px;
+      }
+
+      .flow-box,
+      .trio,
+      .steps li,
+      .check-box,
+      .hypothesis-box {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="tag">Marketing Digital — SEO &amp; Analytics</div>
+    <h1>Optimización SEO + Google Analytics 4<br>Guía técnica para aicron.cloud</h1>
+  </div>
+
+  <p>Esta guía documenta todo lo implementado en el sitio <strong>aicron.cloud</strong> para mejorar su visibilidad en buscadores y obtener inteligencia de negocio sobre el comportamiento de los visitantes. Cubre dos capas complementarias: la optimización SEO (para atraer tráfico) y Google Analytics 4 (para entender ese tráfico y tomar decisiones de marketing).</p>
+
+  <h2>1. Optimización SEO implementada</h2>
+
+  <p>El SEO de aicron.cloud fue trabajado en varias capas que cubren tanto la indexación técnica como la presentación en redes sociales y buscadores.</p>
+
+  <div class="check-box">
+    <div class="check-title">Meta tags en el &lt;head&gt;</div>
+    Título, descripción, viewport y charset configurados correctamente en <span class="highlight">client/index.html</span>. Son los datos que Google extrae para construir el resultado en la página de búsqueda.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">Open Graph (OG) — compartir en redes sociales</div>
+    Tags <span class="highlight">og:title</span>, <span class="highlight">og:description</span>, <span class="highlight">og:image</span>, <span class="highlight">og:url</span> y <span class="highlight">og:type</span> para que LinkedIn, WhatsApp y Facebook muestren una vista previa rica al compartir el link.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">Twitter Card</div>
+    Tags <span class="highlight">twitter:card</span>, <span class="highlight">twitter:title</span>, <span class="highlight">twitter:description</span> e <span class="highlight">twitter:image</span> para que X (Twitter) genere previsualizaciones de tamaño completo.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">JSON-LD — Datos estructurados</div>
+    Schema.org inyectado en el servidor (<span class="highlight">server/routes.ts</span>) con los tipos <strong>Organization</strong> y <strong>WebSite</strong>. Esto permite a Google entender qué es AICRON, su ubicación, servicios y sitelinks de búsqueda.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">Sitemap.xml</div>
+    Archivo generado en <span class="highlight">/sitemap.xml</span> con las rutas principales del sitio (<span class="highlight">/</span>, <span class="highlight">/services</span>, <span class="highlight">/about</span>). Permite a los crawlers de Google descubrir y reindexar el contenido eficientemente.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">Robots.txt</div>
+    Archivo en <span class="highlight">/robots.txt</span> que autoriza el crawling de todas las rutas públicas y apunta al sitemap para facilitar la indexación.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">Manifest.json + PWA</div>
+    Configurado para que el sitio sea instalable como app en móviles. Incluye nombre, color de tema (<span class="highlight">#3CB043</span>), íconos y modo de pantalla.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">Google Search Console — verificación de dominio</div>
+    Archivo de verificación publicado en el sitio para que Google reconozca a AICRON como propietario verificado de <span class="highlight">aicron.cloud</span>. Esto activa el acceso al panel de rendimiento de búsqueda.
+  </div>
+
+  <div class="flow-box">Flujo de indexación con el SEO configurado:
+
+Usuario busca "automatización IA Houston"
+         │
+         ▼
+  Googlebot visita /sitemap.xml
+         │
+         ▼
+  Crawlea /  →  /services  →  /about
+         │
+         ▼
+  Lee JSON-LD → entiende: empresa, ubicación, servicios
+         │
+         ▼
+  Muestra resultado enriquecido en Google Search
+         │
+         ▼
+  Usuario hace clic → llega a aicron.cloud</div>
+
+  <hr class="divider">
+
+  <h2>2. Google Analytics 4 — Configuración</h2>
+
+  <p>GA4 se integró en tres partes: el script de carga global, el tracking de páginas para la SPA y los eventos personalizados de negocio.</p>
+
+  <h2>Script de carga — index.html</h2>
+
+  <p>El Google Tag oficial se insertó en el <span class="highlight">&lt;head&gt;</span> de <span class="highlight">client/index.html</span>, que es el único HTML del sitio (SPA). Al ser una Single Page Application, un solo script cubre todas las rutas.</p>
+
+  <div class="code-block">
+    <span class="comment">&lt;!-- Google tag (gtag.js) --&gt;</span><br>
+    <span class="key">&lt;script</span> <span class="value">async src="https://www.googletagmanager.com/gtag/js?id=G-XM8GDE4RYC"</span><span class="key">&gt;&lt;/script&gt;</span><br>
+    <span class="key">&lt;script&gt;</span><br>
+    &nbsp;&nbsp;window.dataLayer = window.dataLayer || [];<br>
+    &nbsp;&nbsp;<span class="value">function</span> gtag(){dataLayer.push(arguments);}<br>
+    &nbsp;&nbsp;gtag(<span class="value">'js'</span>, <span class="value">new Date()</span>);<br>
+    &nbsp;&nbsp;gtag(<span class="value">'config'</span>, <span class="value">'G-XM8GDE4RYC'</span>);<br>
+    <span class="key">&lt;/script&gt;</span>
+  </div>
+
+  <h2>Hook useAnalytics — tracking de rutas SPA</h2>
+
+  <p>Creado en <span class="highlight">client/src/hooks/use-analytics.ts</span>. Expone dos utilidades: <span class="highlight">trackEvent()</span> para disparar eventos desde cualquier componente, y <span class="highlight">usePageView()</span> que detecta cambios de ruta y notifica a GA4 automáticamente — sin esto, GA4 solo registraría la visita inicial.</p>
+
+  <div class="code-block">
+    <span class="comment">// Disparar cualquier evento personalizado</span><br>
+    <span class="key">trackEvent</span>(<span class="value">"form_submit_success"</span>, { <span class="key">source</span>: <span class="value">"youtube_channel"</span> });<br><br>
+    <span class="comment">// En App.tsx — detecta cada cambio de ruta</span><br>
+    <span class="key">usePageView</span>();
+  </div>
+
+  <hr class="divider">
+
+  <h2>3. Eventos personalizados configurados</h2>
+
+  <p>Los eventos permiten ir más allá del tráfico genérico y entender exactamente cómo interactúan los visitantes con el sitio.</p>
+
+  <div class="check-box">
+    <div class="check-title">form_submit_success — Conversión real</div>
+    Se dispara cuando un usuario envía el formulario de contacto exitosamente. Incluye el campo <span class="highlight">source</span> (ej: <span class="highlight">youtube_channel</span>, <span class="highlight">google</span>, <span class="highlight">referral</span>) para saber qué canal de adquisición convierte mejor.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">cta_click — Intención de contacto</div>
+    Se dispara al hacer clic en cualquier botón "Solicitar Exploración Gratuita". El parámetro <span class="highlight">section</span> identifica desde qué parte de la página se originó: <span class="highlight">hero</span>, <span class="highlight">how_we_work</span>, <span class="highlight">exploration</span>, <span class="highlight">closing</span> o <span class="highlight">nav</span>.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">language_toggle — Perfil de audiencia</div>
+    Se dispara al cambiar el idioma del sitio. Registra <span class="highlight">from</span> y <span class="highlight">to</span> (ES/EN) para medir el ratio de audiencia hispanohablante vs. angloparlante.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">nav_click — Interés por sección</div>
+    Se dispara al navegar desde el menú de navegación. El parámetro <span class="highlight">section</span> indica qué área del sitio genera más interés orgánico.
+  </div>
+
+  <div class="check-box">
+    <div class="check-title">page_view — Todas las páginas de la SPA</div>
+    Automático en cada cambio de ruta via <span class="highlight">usePageView()</span>. GA4 registra <span class="highlight">/</span>, <span class="highlight">/services</span> y <span class="highlight">/about</span> como páginas independientes.
+  </div>
+
+  <hr class="divider">
+
+  <h2>4. Qué información obtienes en GA4</h2>
+
+  <div class="trio">
+    <div class="trio-card">
+      <div class="card-label">Audiencia</div>
+      <p>País, ciudad, idioma del navegador, dispositivo (móvil/escritorio), sistema operativo y navegador. Permite saber si tu audiencia es LATAM o EE.UU. y optimizar para el dispositivo correcto.</p>
+    </div>
+    <div class="trio-card">
+      <div class="card-label">Adquisición</div>
+      <p>De dónde vienen los visitantes: búsqueda orgánica (Google), directo (URL o bookmark), redes sociales (YouTube, LinkedIn, Instagram) o email. Muestra qué canal de marketing genera más tráfico.</p>
+    </div>
+    <div class="trio-card">
+      <div class="card-label">Comportamiento</div>
+      <p>Páginas más visitadas, tiempo en el sitio, tasa de rebote, scroll depth y qué sección del home genera más clics al formulario. Revela qué contenido convence y qué pierde la atención.</p>
+    </div>
+  </div>
+
+  <h2>Embudo de conversión completo</h2>
+
+  <p>Con los eventos configurados, GA4 puede construir un embudo que muestra exactamente dónde se pierden los usuarios:</p>
+
+  <div class="flow-box">YouTube / Google / LinkedIn
+         │
+         ▼  (tráfico de adquisición)
+   Visita aicron.cloud
+         │
+         ▼  page_view  →  ¿qué página entró primero?
+   Navega el sitio
+         │
+         ▼  nav_click  →  ¿qué sección le interesó?
+   Hace clic en CTA
+         │
+         ▼  cta_click (section=hero / exploration / closing)
+   Llega al formulario
+         │
+         ▼  form_submit_success (source=youtube_channel / google)
+   CONVERSIÓN — cliente potencial en la DB + n8n notifica</div>
+
+  <h2>Ventajas para el marketing empresarial</h2>
+
+  <ul style="margin: 16px 0 16px 20px; color: #2d2d3a; line-height: 2;">
+    <li><strong>Redirigir inversión:</strong> si YouTube genera el 60% de las conversiones y LinkedIn el 5%, sabes dónde poner el presupuesto de contenido.</li>
+    <li><strong>Optimizar el sitio:</strong> si el 80% de los usuarios abandona en el hero sin hacer clic en el CTA, hay que mejorar ese copy o la propuesta de valor.</li>
+    <li><strong>Validar audiencia ES vs. EN:</strong> el evento <span class="highlight">language_toggle</span> + el idioma del navegador muestran si la audiencia principal es LATAM o EE.UU., para priorizar el idioma del contenido.</li>
+    <li><strong>Medir campañas:</strong> al lanzar una campaña de LinkedIn, puedes ver en tiempo real cuántas visitas generó y cuántas convirtieron.</li>
+    <li><strong>Decisiones sin suposiciones:</strong> reemplaza el "creo que el formulario funciona bien" por datos reales de cuántas personas lo ven vs. cuántas lo envían.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>5. Cómo verificar que todo funciona</h2>
+
+  <ol class="steps">
+    <li><span>Abre <strong>analytics.google.com</strong> → selecciona la propiedad <strong>aicron.cloud</strong> → ve a <strong>Informes → Tiempo real</strong>.</span></li>
+    <li><span>Abre el sitio en otra pestaña y navega entre páginas. Deberías ver el contador de usuarios activos subir a 1.</span></li>
+    <li><span>Haz clic en un botón de CTA. En Tiempo real aparecerá el evento <strong>cta_click</strong> con el parámetro <span class="highlight">section</span>.</span></li>
+    <li><span>Cambia el idioma con el toggle. Aparecerá el evento <strong>language_toggle</strong>.</span></li>
+    <li><span>Envía el formulario de prueba. Aparecerá el evento <strong>form_submit_success</strong> con el campo <span class="highlight">source</span>.</span></li>
+    <li><span>Para análisis histórico, espera 24–48 horas: GA4 procesa los datos antes de mostrarlos en los informes completos de Audiencia, Adquisición y Comportamiento.</span></li>
+  </ol>
+
+  <div class="callout">
+    El SEO atrae a los visitantes; GA4 te dice quiénes son, de dónde vienen y qué los convierte en clientes. Juntos, eliminan las suposiciones del marketing y permiten tomar decisiones basadas en datos reales de aicron.cloud.
+  </div>
+
+  <div class="footer">
+    <span><strong>Pedro Machado</strong> — Founder, AICRON</span>
+    <span>Powered by <a href="https://aicron.cloud/" target="_blank">AICRON</a></span>
+  </div>
+
+</body>
+</html>
