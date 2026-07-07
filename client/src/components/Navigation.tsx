@@ -91,12 +91,11 @@ export function Navigation() {
           </Link>
           <LanguageToggle />
           <ThemeToggle />
-          <Button
-            onClick={scrollToForm}
-            className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 rounded-full px-6"
-          >
-            {t.nav.cta}
-          </Button>
+          <Link href="/agendarcita">
+            <Button className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 rounded-full px-6">
+              {t.nav.cta}
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -151,9 +150,11 @@ export function Navigation() {
                 <ThemeToggle />
               </div>
             </div>
-            <Button onClick={scrollToForm} className="w-full">
-              {t.nav.cta}
-            </Button>
+            <Link href="/agendarcita" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button className="w-full">
+                {t.nav.cta}
+              </Button>
+            </Link>
           </div>
         </motion.div>
       )}
