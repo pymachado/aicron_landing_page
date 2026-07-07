@@ -507,6 +507,13 @@ export const translations = {
       privacyLink: "política de privacidad",
       privacySuffix: ". Tus datos están seguros con nosotros.",
     },
+
+    agendarCita: {
+      badge: "30 min · Gratis · Sin compromiso",
+      title: "Agenda tu exploración gratuita",
+      subtitle: "Una conversación donde escuchamos tu operación y te decimos con honestidad si la IA puede ayudarte — sin presión, sin venta.",
+      trust: ["Sin costo", "Sin compromiso", "Recomendación honesta"],
+    },
   },
 
   en: {
@@ -1016,6 +1023,13 @@ export const translations = {
       privacy: "By submitting this form you accept our",
       privacyLink: "privacy policy",
       privacySuffix: ". Your data is safe with us.",
+    },
+
+    agendarCita: {
+      badge: "30 min · Free · No commitment",
+      title: "Schedule your free exploration",
+      subtitle: "A conversation where we listen to your operation and honestly tell you if AI can help you — no pressure, no sales pitch.",
+      trust: ["No cost", "No commitment", "Honest recommendation"],
     },
   },
 } as const;

@@ -77,6 +77,26 @@ const routeMeta: Record<string, Record<Lang, RouteMeta>> = {
       canonical: `${BASE_URL}/about`,
     },
   },
+  "/agendarcita": {
+    es: {
+      lang: "es",
+      title: "Agendar Exploración Gratuita — 30 minutos con AICRON",
+      description: "Agenda una sesión de 30 minutos con AICRON. Escuchamos tu operación y te decimos con honestidad si la IA puede ayudarte. Sin costo, sin compromiso.",
+      keywords: "agendar cita automatización IA, exploración gratuita IA, diagnóstico IA empresas, consulta gratuita automatización, AICRON Houston",
+      ogTitle: "Agenda tu Exploración Gratuita con AICRON",
+      ogDescription: "30 minutos. Sin costo. Sin compromiso. Descubre si la IA puede generar impacto real en tu negocio.",
+      canonical: `${BASE_URL}/agendarcita`,
+    },
+    en: {
+      lang: "en",
+      title: "Schedule Free Exploration — 30 minutes with AICRON",
+      description: "Schedule a 30-minute session with AICRON. We listen to your operation and honestly tell you if AI can help. No cost, no commitment.",
+      keywords: "schedule AI automation consultation, free AI exploration, AI business diagnosis, free automation consultation, AICRON Houston",
+      ogTitle: "Schedule Your Free Exploration with AICRON",
+      ogDescription: "30 minutes. No cost. No commitment. Find out if AI can generate real impact in your business.",
+      canonical: `${BASE_URL}/agendarcita`,
+    },
+  },
 };
 
 const defaultMeta = routeMeta["/"];

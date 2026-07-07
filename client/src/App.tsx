@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/Home";
 import Services from "@/pages/Services";
 import About from "@/pages/About";
+import AgendarCita from "@/pages/AgendarCita";
 import NotFound from "@/pages/not-found";
 import { usePageView } from "@/hooks/use-analytics";
 
@@ -41,6 +42,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
         <Route path="/about" component={About} />
+        <Route path="/agendarcita" component={AgendarCita} />
         <Route component={NotFound} />
       </Switch>
     </>
