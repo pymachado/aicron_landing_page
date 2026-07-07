@@ -1,5 +1,5 @@
 import { Navigation } from "@/components/Navigation";
-import { ContactForm } from "@/components/ContactForm";
+import { BookingSection } from "@/components/BookingSection";
 import { Footer } from "@/components/Footer";
 import { NLogoBackground } from "@/components/NLogoBackground";
 import { Button } from "@/components/ui/button";
@@ -516,7 +516,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ContactForm />
+      <BookingSection id="contact-form" />
       <Footer />
       <ScrollToTop />
     </div>
